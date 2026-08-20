@@ -1,5 +1,5 @@
 # 🌱 Grasslook
-> **Rest your eyes. Reset your posture. Reclaim your focus.**  
+> **Rest your eyes. Reclaim your focus. Look at grass.**  
 > A native, privacy-first macOS digital wellness companion combining proactive eye rest with mindful distraction delays.
 ---
 ## ⚡ Quick Start
