@@ -1,32 +1,48 @@
-# Grasslook
+# 🌱 Grasslook
 
-## How the repo works
-- `Sources/GrasslookApp/`: Application entry point (`@main`), `MenuBarExtra` lifecycle, and App Delegate.
-- `Sources/Core/Breaks/`: `BreakScheduler`, timer state machine (Micro-breaks: 20s/20m; Long breaks: 5m/60m), idle/meeting smart-pause sensors.
-- `Sources/Core/Friction/`: `AppInterceptionEngine`, `BrowserMonitor` (universal AX + AppleScript URL extractor), `CooldownManager`, target app/domain matchers.
-- `Sources/Core/Analytics/`: Local privacy-safe metrics (breaks taken vs skipped, distractions avoided, mindful minutes).
-- `Sources/UI/Overlays/`: Multi-display full-screen `NSPanel` overlay controllers, calming Liquid Glass blur, animated breathing bubble (`BreathingView`), countdown timer HUD.
-- `Sources/UI/Settings/`: Settings window (NavigationSplitView / Liquid Glass) for configuring break intervals, targeted apps/websites, audio preferences, and viewing stats.
-- `Tests/`: Unit tests and snapshot test suites for timing models, pattern matchers, and view states.
+> Native macOS digital wellness companion combining proactive eye rest with mindful distraction delays.
 
-## Build / test / run
+## Installation via NPM / NPX
 
-\# Generate the Xcode project after editing project.yml
+### Quick Run (Zero Install)
+```bash
+npx grasslook
+```
 
-`xcodegen generate`
+### Global Install
+```bash
+npm install -g grasslook
+```
 
-\# Build (open in Xcode or use xcodebuild)
+---
 
-`xcodebuild -project "Grasslook.xcodeproj" -scheme Grasslook build`
+## CLI Usage
 
-\# Test
+```bash
+# Start Grasslook in the menu bar
+grasslook
 
-`xcodebuild -project "Grasslook.xcodeproj" -scheme Grasslook test`
+# Check status & PID
+grasslook status
 
-\# Package / sign / notarize
+# Stop / Quit Grasslook
+grasslook stop
 
-`./build_and_package.sh`
+# View help
+grasslook --help
+```
 
-- Run tests (including snapshot tests) before declaring a task complete.  
-- If snapshot tests fail, inspect the diff before re-recording — don't blindly re-record baselines.  
-- Fix root causes; never disable a failing test or bypass a check to make it pass.
+---
+
+## Features
+
+- **Proactive Eye Health:** 20-20-20 rule micro-break timer & posture reset prompts.
+- **Mindful Friction:** Intercepts targeted distracting sites (Safari, Chrome, Helium, Dia, Arc, Firefox, etc.) and applications with calming 4-4-4 breathing exercises.
+- **Native macOS 26 Design:** Top-toolbar Preferences with dark glass overlays and binaural audio feedback.
+- **Privacy-First:** 100% local operation with zero telemetry or network trackers.
+
+---
+
+## Repository
+
+[GitHub: testspeed002/Grasslook](https://github.com/testspeed002/Grasslook)
