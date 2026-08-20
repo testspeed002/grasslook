@@ -1,0 +1,626 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05042011311B9DE364656912 /* BreakSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */; };
+		05A3B559C71FBC9C911C6C86 /* PresentationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279FF36CEDEBF1E0D8DA25E0 /* PresentationSensor.swift */; };
+		10855E95914C45FE89C82337 /* BreakScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */; };
+		12A1FF49698F99FC90582512 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */; };
+		186805EE0682AE9FD1385A70 /* InstalledAppsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */; };
+		25DC9EFB3DAF14A7304E8BAB /* BreakOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E72859DC3FB9259FA58FDB9 /* BreakOverlayView.swift */; };
+		4E8A6EF40186355B414A2553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */; };
+		5B63E71F4C52C29D8C880F52 /* GrasslookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8B99A7E79AF6D49E24F451 /* GrasslookApp.swift */; };
+		62BFE301E34FA787F0CFFDAA /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DF82305E06D2FD8C12D9A /* SettingsWindowController.swift */; };
+		741F30E0CD78906502A979DD /* BrowserMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */; };
+		7559632D63A00CC2B9BF494E /* OverlayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C567F150BC7553120E2A13CB /* OverlayWindowController.swift */; };
+		853403DA0B956BC298C6B0F4 /* TargetRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C229A0FA26630344C799F17F /* TargetRule.swift */; };
+		8B2197C28D6D0944B68432A4 /* GrasslookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532930B96BF785BBE6B91D50 /* GrasslookTests.swift */; };
+		9BC9D7EFA180D237B1716E71 /* VisualEffectBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E34B474F407D4A23648DDB /* VisualEffectBackgroundView.swift */; };
+		A95AC9633ACAD8FD10AC2C2A /* CooldownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945A0A889E4B986C5FE845A /* CooldownManager.swift */; };
+		B14062797358835434C9F05C /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D6F9093D60F4A0A6529A09 /* AnalyticsManager.swift */; };
+		B625409772249E179F13A838 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */; };
+		BE06560BEA0EC15F7A66FF97 /* BreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419B1DF42C2C12443E76F47 /* BreakState.swift */; };
+		C7A60B8D3C84BB6C24B14ACC /* ForestTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBEC507367E2F29AB320D89 /* ForestTheme.swift */; };
+		CE2B227381E22B350862C2C9 /* AppInterceptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */; };
+		D26F98E26DC36DB11E285E5D /* BreakType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A65DAD5E5282C7E151924AB /* BreakType.swift */; };
+		D4B534CFF5C4CC2E1F489CA4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617BDF676455B5F2C0D4885 /* SettingsView.swift */; };
+		D7132FBFB1F1D786A01268D3 /* IdleSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C6B82BE08F2C5A626F48F3 /* IdleSensor.swift */; };
+		D790CD8F527AF75B40B56545 /* GrasslookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4ABE4BD52B608308868D8E /* GrasslookCoordinator.swift */; };
+		DB247552D6F348343F09FEDC /* InterceptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF24268A3F296E2A5920DEB /* InterceptionTests.swift */; };
+		F5A11BC61BCF4A4AE7B7A5CC /* AudioFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */; };
+		FFF1904861EE2399FCDB4246 /* BreathingBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3378B321DDE873200DFA7F /* BreathingBubbleView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		123DAA61B9CCD16F92FEC208 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 326619818C3E22D95660F83F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8848260AD05DD3AFB936ED96;
+			remoteInfo = Grasslook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserMonitor.swift; sourceTree = "<group>"; };
+		16E34B474F407D4A23648DDB /* VisualEffectBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBackgroundView.swift; sourceTree = "<group>"; };
+		1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		279FF36CEDEBF1E0D8DA25E0 /* PresentationSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationSensor.swift; sourceTree = "<group>"; };
+		2A65DAD5E5282C7E151924AB /* BreakType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakType.swift; sourceTree = "<group>"; };
+		2C6DF82305E06D2FD8C12D9A /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakSchedulerTests.swift; sourceTree = "<group>"; };
+		4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		4B4ABE4BD52B608308868D8E /* GrasslookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookCoordinator.swift; sourceTree = "<group>"; };
+		532930B96BF785BBE6B91D50 /* GrasslookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookTests.swift; sourceTree = "<group>"; };
+		5617BDF676455B5F2C0D4885 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5E72859DC3FB9259FA58FDB9 /* BreakOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakOverlayView.swift; sourceTree = "<group>"; };
+		5EBEC507367E2F29AB320D89 /* ForestTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestTheme.swift; sourceTree = "<group>"; };
+		6945A0A889E4B986C5FE845A /* CooldownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownManager.swift; sourceTree = "<group>"; };
+		6D8B99A7E79AF6D49E24F451 /* GrasslookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookApp.swift; sourceTree = "<group>"; };
+		72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
+		A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakScheduler.swift; sourceTree = "<group>"; };
+		A6D6F9093D60F4A0A6529A09 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsProvider.swift; sourceTree = "<group>"; };
+		C229A0FA26630344C799F17F /* TargetRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetRule.swift; sourceTree = "<group>"; };
+		C567F150BC7553120E2A13CB /* OverlayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayWindowController.swift; sourceTree = "<group>"; };
+		CCF24268A3F296E2A5920DEB /* InterceptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptionTests.swift; sourceTree = "<group>"; };
+		D0C6B82BE08F2C5A626F48F3 /* IdleSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleSensor.swift; sourceTree = "<group>"; };
+		DAEDFDBCB07ABFB37C9FD360 /* Grasslook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grasslook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedbackManager.swift; sourceTree = "<group>"; };
+		E384B7C44E3231C0E594BA17 /* GrasslookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrasslookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3378B321DDE873200DFA7F /* BreathingBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingBubbleView.swift; sourceTree = "<group>"; };
+		F419B1DF42C2C12443E76F47 /* BreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakState.swift; sourceTree = "<group>"; };
+		F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInterceptionEngine.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1A5CFF524A3387697522B8BD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5D8F990ACF9ACFAAEC6E83F0 /* Overlays */,
+				41BC0CB48B95D69D01EA83D1 /* Sensory */,
+				C248EBC860F0F54A75CFFDC1 /* Settings */,
+				8C18882903AA0E5C0623C6E7 /* Theme */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		22A95BB4E114DD72230F21A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAEDFDBCB07ABFB37C9FD360 /* Grasslook.app */,
+				E384B7C44E3231C0E594BA17 /* GrasslookTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3CCBC052874890521555CDC2 /* Friction */ = {
+			isa = PBXGroup;
+			children = (
+				F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */,
+				145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */,
+				6945A0A889E4B986C5FE845A /* CooldownManager.swift */,
+				AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */,
+				C229A0FA26630344C799F17F /* TargetRule.swift */,
+			);
+			path = Friction;
+			sourceTree = "<group>";
+		};
+		41BC0CB48B95D69D01EA83D1 /* Sensory */ = {
+			isa = PBXGroup;
+			children = (
+				DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */,
+			);
+			path = Sensory;
+			sourceTree = "<group>";
+		};
+		5D8F990ACF9ACFAAEC6E83F0 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				5E72859DC3FB9259FA58FDB9 /* BreakOverlayView.swift */,
+				EB3378B321DDE873200DFA7F /* BreathingBubbleView.swift */,
+				C567F150BC7553120E2A13CB /* OverlayWindowController.swift */,
+				16E34B474F407D4A23648DDB /* VisualEffectBackgroundView.swift */,
+			);
+			path = Overlays;
+			sourceTree = "<group>";
+		};
+		76C3A8F4A05288682C307582 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B3ECA2BFF0D3DBC36572B709 /* Analytics */,
+				C5C8CFDA99B79E84301EE1AC /* Breaks */,
+				3CCBC052874890521555CDC2 /* Friction */,
+				8FC355291D9050617A6AE801 /* Sensors */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		81D5C53A4071FBEAD324BD18 = {
+			isa = PBXGroup;
+			children = (
+				A77A46A83EB39E451C18977C /* Resources */,
+				B935B85FD1BD8C529D07E9F2 /* Sources */,
+				851E87E88669BEC13DE7F447 /* Tests */,
+				22A95BB4E114DD72230F21A6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		851E87E88669BEC13DE7F447 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */,
+				3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */,
+				532930B96BF785BBE6B91D50 /* GrasslookTests.swift */,
+				CCF24268A3F296E2A5920DEB /* InterceptionTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		8C18882903AA0E5C0623C6E7 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				5EBEC507367E2F29AB320D89 /* ForestTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		8FC355291D9050617A6AE801 /* Sensors */ = {
+			isa = PBXGroup;
+			children = (
+				D0C6B82BE08F2C5A626F48F3 /* IdleSensor.swift */,
+				279FF36CEDEBF1E0D8DA25E0 /* PresentationSensor.swift */,
+			);
+			path = Sensors;
+			sourceTree = "<group>";
+		};
+		A77A46A83EB39E451C18977C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */,
+				1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3ECA2BFF0D3DBC36572B709 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				A6D6F9093D60F4A0A6529A09 /* AnalyticsManager.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		B935B85FD1BD8C529D07E9F2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				76C3A8F4A05288682C307582 /* Core */,
+				FCEB0A5F7CF007100D488859 /* GrasslookApp */,
+				1A5CFF524A3387697522B8BD /* UI */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C248EBC860F0F54A75CFFDC1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5617BDF676455B5F2C0D4885 /* SettingsView.swift */,
+				2C6DF82305E06D2FD8C12D9A /* SettingsWindowController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C5C8CFDA99B79E84301EE1AC /* Breaks */ = {
+			isa = PBXGroup;
+			children = (
+				A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */,
+				F419B1DF42C2C12443E76F47 /* BreakState.swift */,
+				2A65DAD5E5282C7E151924AB /* BreakType.swift */,
+			);
+			path = Breaks;
+			sourceTree = "<group>";
+		};
+		FCEB0A5F7CF007100D488859 /* GrasslookApp */ = {
+			isa = PBXGroup;
+			children = (
+				6D8B99A7E79AF6D49E24F451 /* GrasslookApp.swift */,
+				4B4ABE4BD52B608308868D8E /* GrasslookCoordinator.swift */,
+			);
+			path = GrasslookApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		847758B0A383F3DA5CC570F2 /* GrasslookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 943B905CD02CA7C95EDD089C /* Build configuration list for PBXNativeTarget "GrasslookTests" */;
+			buildPhases = (
+				B7AE1EFEC497CF711AB69858 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF5DBED0E8F8CF85680B1E3B /* PBXTargetDependency */,
+			);
+			name = GrasslookTests;
+			packageProductDependencies = (
+			);
+			productName = GrasslookTests;
+			productReference = E384B7C44E3231C0E594BA17 /* GrasslookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8848260AD05DD3AFB936ED96 /* Grasslook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7D62FFC9CDFE2604F0541BC /* Build configuration list for PBXNativeTarget "Grasslook" */;
+			buildPhases = (
+				CA7DA7CF6CE332584B71F18B /* Sources */,
+				5B40C4A90BDFE1A5FF389E22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Grasslook;
+			packageProductDependencies = (
+			);
+			productName = Grasslook;
+			productReference = DAEDFDBCB07ABFB37C9FD360 /* Grasslook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		326619818C3E22D95660F83F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					847758B0A383F3DA5CC570F2 = {
+						ProvisioningStyle = Automatic;
+					};
+					8848260AD05DD3AFB936ED96 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F581D419583E34931CBD1F11 /* Build configuration list for PBXProject "Grasslook" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 81D5C53A4071FBEAD324BD18;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 22A95BB4E114DD72230F21A6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8848260AD05DD3AFB936ED96 /* Grasslook */,
+				847758B0A383F3DA5CC570F2 /* GrasslookTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B40C4A90BDFE1A5FF389E22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12A1FF49698F99FC90582512 /* AppIcon.icns in Resources */,
+				4E8A6EF40186355B414A2553 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B7AE1EFEC497CF711AB69858 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B625409772249E179F13A838 /* AnalyticsTests.swift in Sources */,
+				05042011311B9DE364656912 /* BreakSchedulerTests.swift in Sources */,
+				8B2197C28D6D0944B68432A4 /* GrasslookTests.swift in Sources */,
+				DB247552D6F348343F09FEDC /* InterceptionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA7DA7CF6CE332584B71F18B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B14062797358835434C9F05C /* AnalyticsManager.swift in Sources */,
+				CE2B227381E22B350862C2C9 /* AppInterceptionEngine.swift in Sources */,
+				F5A11BC61BCF4A4AE7B7A5CC /* AudioFeedbackManager.swift in Sources */,
+				25DC9EFB3DAF14A7304E8BAB /* BreakOverlayView.swift in Sources */,
+				10855E95914C45FE89C82337 /* BreakScheduler.swift in Sources */,
+				BE06560BEA0EC15F7A66FF97 /* BreakState.swift in Sources */,
+				D26F98E26DC36DB11E285E5D /* BreakType.swift in Sources */,
+				FFF1904861EE2399FCDB4246 /* BreathingBubbleView.swift in Sources */,
+				741F30E0CD78906502A979DD /* BrowserMonitor.swift in Sources */,
+				A95AC9633ACAD8FD10AC2C2A /* CooldownManager.swift in Sources */,
+				C7A60B8D3C84BB6C24B14ACC /* ForestTheme.swift in Sources */,
+				5B63E71F4C52C29D8C880F52 /* GrasslookApp.swift in Sources */,
+				D790CD8F527AF75B40B56545 /* GrasslookCoordinator.swift in Sources */,
+				D7132FBFB1F1D786A01268D3 /* IdleSensor.swift in Sources */,
+				186805EE0682AE9FD1385A70 /* InstalledAppsProvider.swift in Sources */,
+				7559632D63A00CC2B9BF494E /* OverlayWindowController.swift in Sources */,
+				05A3B559C71FBC9C911C6C86 /* PresentationSensor.swift in Sources */,
+				D4B534CFF5C4CC2E1F489CA4 /* SettingsView.swift in Sources */,
+				62BFE301E34FA787F0CFFDAA /* SettingsWindowController.swift in Sources */,
+				853403DA0B956BC298C6B0F4 /* TargetRule.swift in Sources */,
+				9BC9D7EFA180D237B1716E71 /* VisualEffectBackgroundView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF5DBED0E8F8CF85680B1E3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8848260AD05DD3AFB936ED96 /* Grasslook */;
+			targetProxy = 123DAA61B9CCD16F92FEC208 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		199A2AB9DD50DC4EA756B105 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/Grasslook.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAccessibilityUsageDescription = "Grasslook requires Accessibility permissions to monitor frontmost browser tabs and distracting application switches.";
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to query active browser URLs for mindful friction delays.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Grasslook. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_CODE_SIGN_FLAGS = "--requirements \"=designated => identifier \\\"com.grasslook.app\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.app;
+				PRODUCT_NAME = Grasslook;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		419FA1D4F226C5C3D7385F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements/GrasslookTests.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.tests;
+				PRODUCT_NAME = GrasslookTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grasslook.app/Contents/MacOS/Grasslook";
+			};
+			name = Release;
+		};
+		5AD54235776089BCF8D27D5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		8149045EDFAF738B4D525807 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/Grasslook.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAccessibilityUsageDescription = "Grasslook requires Accessibility permissions to monitor frontmost browser tabs and distracting application switches.";
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to query active browser URLs for mindful friction delays.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Grasslook. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_CODE_SIGN_FLAGS = "--requirements \"=designated => identifier \\\"com.grasslook.app\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.app;
+				PRODUCT_NAME = Grasslook;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DAABE177D54F3DFAA9361AD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements/GrasslookTests.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.tests;
+				PRODUCT_NAME = GrasslookTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grasslook.app/Contents/MacOS/Grasslook";
+			};
+			name = Debug;
+		};
+		ED7A88B86F5281BA8578594F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		943B905CD02CA7C95EDD089C /* Build configuration list for PBXNativeTarget "GrasslookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAABE177D54F3DFAA9361AD0 /* Debug */,
+				419FA1D4F226C5C3D7385F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F581D419583E34931CBD1F11 /* Build configuration list for PBXProject "Grasslook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7A88B86F5281BA8578594F /* Debug */,
+				5AD54235776089BCF8D27D5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F7D62FFC9CDFE2604F0541BC /* Build configuration list for PBXNativeTarget "Grasslook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				199A2AB9DD50DC4EA756B105 /* Debug */,
+				8149045EDFAF738B4D525807 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 326619818C3E22D95660F83F /* Project object */;
+}
