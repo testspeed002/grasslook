@@ -1,0 +1,40 @@
+{
+  "name": "grasslook",
+  "version": "1.0.0",
+  "description": "Native macOS digital wellness companion combining proactive eye rest and mindful distraction delays.",
+  "main": "npm/bin/grasslook.js",
+  "bin": {
+    "grasslook": "./npm/bin/grasslook.js"
+  },
+  "scripts": {
+    "install": "node ./npm/scripts/postinstall.js",
+    "postinstall": "node ./npm/scripts/postinstall.js",
+    "build": "bash ./build_and_package.sh",
+    "start": "node ./npm/bin/grasslook.js",
+    "run": "node ./npm/bin/grasslook.js",
+    "test": "xcodebuild -project Grasslook.xcodeproj -scheme Grasslook -derivedDataPath .derivedData test",
+    "package": "bash ./build_and_package.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/testspeed002/Grasslook"
+  },
+  "keywords": [
+    "lookaway",
+    "one-sec",
+    "macos",
+    "wellness",
+    "screen-time",
+    "eye-strain",
+    "focus"
+  ],
+  "author": "Grasslook Contributors",
+  "license": "MIT",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64",
+    "x64"
+  ]
+}
