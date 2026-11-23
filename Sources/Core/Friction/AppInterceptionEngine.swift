@@ -1,18 +1,29 @@
-import Foundation
-import AppKit
+// Monitors application switches and active browser tabs to present mindful friction.
 
-/// Observes frontmost application focus and browser tab switches to insert mindful delays.
+import AppKit
+import Foundation
+
+/// Monitors app and browser tab switches to show mindful delays.
 @MainActor
 public final class AppInterceptionEngine: ObservableObject {
     // MARK: - Published Properties
     @Published public var rules: [TargetRule]
     @Published public private(set) var isMonitoring: Bool = false
     @Published public private(set) var activeIntervention: ActiveIntervention?
+    @Published public var browserEnforcementAction: BrowserEnforcementAction = .redirectToShield
+    @Published public var sendCmdWToNonScriptableBrowsers: Bool = false
 
     // MARK: - Dependencies
     private let browserMonitor: BrowserMonitorProtocol
     public let cooldownManager: CooldownManager
-    private var workspaceObserver: (any NSObjectProtocol)?
+    private let pollingInterval: TimeInterval
+    private let frontmostPIDProvider: @MainActor () -> pid_t?
+    private let dateProvider: @Sendable () -> Date
+
+    nonisolated(unsafe) private var workspaceObserver: (any NSObjectProtocol)?
+    nonisolated(unsafe) private var pollingTask: Task<Void, Never>?
+    private var lastSuppressedHit: (pid: pid_t, host: String, expiresAt: Date)?
+    private let suppressionWindow: TimeInterval = 2.5
 
     // MARK: - Models
     public struct ActiveIntervention: Identifiable, Sendable {
@@ -22,7 +33,13 @@ public final class AppInterceptionEngine: ObservableObject {
         public let targetURL: URL?
         public let startedAt: Date
 
-        public init(rule: TargetRule, application: NSRunningApplication, targetURL: URL? = nil, startedAt: Date = Date()) {
+        /// Creates an active intervention record for a triggered rule.
+        public init(
+            rule: TargetRule,
+            application: NSRunningApplication,
+            targetURL: URL? = nil,
+            startedAt: Date = Date()
+        ) {
             self.rule = rule
             self.application = application
             self.targetURL = targetURL
@@ -33,18 +50,33 @@ public final class AppInterceptionEngine: ObservableObject {
     // MARK: - Callbacks
     public var onInterventionTriggered: ((ActiveIntervention) -> Void)?
 
+    /// Creates an interception engine with configurable rules, browser monitor, and polling dependencies.
     public init(
         rules: [TargetRule] = TargetRule.defaults,
         browserMonitor: BrowserMonitorProtocol = BrowserMonitor(),
-        cooldownManager: CooldownManager = CooldownManager()
+        cooldownManager: CooldownManager = CooldownManager(),
+        pollingInterval: TimeInterval = 1.25,
+        frontmostPIDProvider: @escaping @MainActor () -> pid_t? = { NSWorkspace.shared.frontmostApplication?.processIdentifier },
+        dateProvider: @escaping @Sendable () -> Date = { Date() }
     ) {
         self.rules = rules
         self.browserMonitor = browserMonitor
         self.cooldownManager = cooldownManager
+        self.pollingInterval = pollingInterval
+        self.frontmostPIDProvider = frontmostPIDProvider
+        self.dateProvider = dateProvider
+    }
+
+    deinit {
+        pollingTask?.cancel()
+        if let observer = workspaceObserver {
+            NSWorkspace.shared.notificationCenter.removeObserver(observer)
+        }
     }
 
     // MARK: - Lifecycle
 
+    /// Starts observing workspace app activations and polling active browser tabs.
     public func startMonitoring() {
         guard !isMonitoring else { return }
         isMonitoring = true
@@ -57,36 +89,46 @@ public final class AppInterceptionEngine: ObservableObject {
             guard let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
                 return
             }
-            Task { @MainActor in
-                self?.evaluateApplication(app)
+            Task { @MainActor [weak self] in
+                await self?.evaluateApplication(app)
             }
         }
 
-        // Evaluate currently active frontmost application
+        startPollingLoop()
+
         if let frontmost = NSWorkspace.shared.frontmostApplication {
-            evaluateApplication(frontmost)
+            Task { @MainActor [weak self] in
+                await self?.evaluateApplication(frontmost)
+            }
         }
     }
 
+    /// Stops observing workspace events and cancels active browser polling.
     public func stopMonitoring() {
         guard isMonitoring else { return }
         isMonitoring = false
+        pollingTask?.cancel()
+        pollingTask = nil
         if let observer = workspaceObserver {
             NSWorkspace.shared.notificationCenter.removeObserver(observer)
             workspaceObserver = nil
         }
         activeIntervention = nil
+        lastSuppressedHit = nil
     }
 
     /// Evaluates an application against active rules and triggers friction if necessary.
-    public func evaluateApplication(_ application: NSRunningApplication) {
-        guard isMonitoring else { return }
+    public func evaluateApplication(_ application: NSRunningApplication) async {
+        guard isMonitoring, activeIntervention == nil else { return }
         guard let bundleId = application.bundleIdentifier else { return }
 
         // 1. Check Native Desktop App Rules
         for rule in rules where rule.isEnabled {
             if case .application = rule.kind, rule.matches(bundleIdentifier: bundleId) {
                 if !cooldownManager.isUnderCooldown(for: rule) {
+                    if let frontmostPID = frontmostPIDProvider(), frontmostPID != application.processIdentifier {
+                        return
+                    }
                     triggerIntervention(for: rule, application: application, targetURL: nil)
                     return
                 }
@@ -94,15 +136,35 @@ public final class AppInterceptionEngine: ObservableObject {
         }
 
         // 2. Check Browser Website Rules (if app is a supported browser)
-        if browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId) {
-            if let activeURL = browserMonitor.extractActiveURL(from: application) {
-                for rule in rules where rule.isEnabled {
-                    if case .website = rule.kind, rule.matches(url: activeURL) {
-                        if !cooldownManager.isUnderCooldown(for: rule) {
-                            triggerIntervention(for: rule, application: application, targetURL: activeURL)
-                            return
-                        }
-                    }
+        if await browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId) {
+            await pollActiveBrowserOnce(for: application)
+        }
+    }
+
+    /// Performs a single active-tab inspection pass for a supported browser application.
+    public func pollActiveBrowserOnce(for application: NSRunningApplication) async {
+        guard isMonitoring, activeIntervention == nil else { return }
+        guard let bundleId = application.bundleIdentifier else { return }
+        guard await browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId) else { return }
+
+        guard let activeURL = await browserMonitor.extractActiveURL(from: application) else { return }
+
+        // Verify frontmost PID is unchanged after async URL extraction before presenting an overlay.
+        if let frontmostPID = frontmostPIDProvider(), frontmostPID != application.processIdentifier {
+            return
+        }
+        guard isMonitoring, activeIntervention == nil else { return }
+
+        let host = activeURL.host?.lowercased() ?? ""
+        if isSuppressed(pid: application.processIdentifier, host: host) {
+            return
+        }
+
+        for rule in rules where rule.isEnabled {
+            if case .website = rule.kind, rule.matches(url: activeURL) {
+                if !cooldownManager.isUnderCooldown(for: rule) {
+                    triggerIntervention(for: rule, application: application, targetURL: activeURL)
+                    return
                 }
             }
         }
@@ -110,26 +172,107 @@ public final class AppInterceptionEngine: ObservableObject {
 
     // MARK: - Intervention Actions
 
+    /// Records a mindful pass cooldown and dismisses the active intervention.
     public func proceedPastIntervention(for intervention: ActiveIntervention) {
         cooldownManager.recordMindfulPass(for: intervention.rule)
         activeIntervention = nil
     }
 
-    public func dismissInterventionAndCloseApp(for intervention: ActiveIntervention) {
+    /// Enforces dismissal of a distracting target via browser redirect/close or hiding a desktop app.
+    public func enforceDismissal(for intervention: ActiveIntervention) async -> BrowserEnforcementResult {
         activeIntervention = nil
-        
-        if let bundleId = intervention.application.bundleIdentifier,
-           (intervention.targetURL != nil || browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId)) {
-            // Close the distracting tab and open a clean blank tab in the browser
-            browserMonitor.closeDistractingTabAndOpenBlank(bundleIdentifier: bundleId)
+
+        let host = intervention.targetURL?.host?.lowercased() ?? ""
+        lastSuppressedHit = (
+            pid: intervention.application.processIdentifier,
+            host: host,
+            expiresAt: dateProvider().addingTimeInterval(suppressionWindow)
+        )
+
+        if await shouldEnforceBrowserDismissal(for: intervention) {
+            let options = BrowserEnforcementOptions(
+                action: browserEnforcementAction,
+                sendCmdWToNonScriptable: sendCmdWToNonScriptableBrowsers,
+                ruleName: intervention.rule.name,
+                blockedURL: intervention.targetURL
+            )
+            return await browserMonitor.enforceBlock(on: intervention.application, options: options)
         } else {
-            // Hide the distracting desktop application
             intervention.application.hide()
+            return .hidApplication
         }
     }
 
+    private func shouldEnforceBrowserDismissal(for intervention: ActiveIntervention) async -> Bool {
+        guard let bundleId = intervention.application.bundleIdentifier else {
+            return false
+        }
+        if intervention.targetURL != nil {
+            return true
+        }
+        return await browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId)
+    }
+
+    /// Dismisses the active intervention and routes enforcement asynchronously.
+    public func dismissInterventionAndCloseApp(for intervention: ActiveIntervention) {
+        Task { @MainActor [weak self] in
+            _ = await self?.enforceDismissal(for: intervention)
+        }
+    }
+
+    // MARK: - Private Helpers
+
+    private func startPollingLoop() {
+        pollingTask?.cancel()
+        let intervalNanos = UInt64(max(0.05, pollingInterval) * 1_000_000_000)
+
+        pollingTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                do {
+                    try await Task.sleep(nanoseconds: intervalNanos)
+                } catch {
+                    break
+                }
+                guard !Task.isCancelled, let self = self, self.isMonitoring else { break }
+                guard self.activeIntervention == nil else { continue }
+                guard let frontmostPID = self.frontmostPIDProvider() else { continue }
+                guard let app = self.runningApplication(for: frontmostPID),
+                      let bundleId = app.bundleIdentifier else {
+                    continue
+                }
+                if await self.browserMonitor.isSupportedBrowser(bundleIdentifier: bundleId) {
+                    await self.pollActiveBrowserOnce(for: app)
+                }
+            }
+        }
+    }
+
+    private func runningApplication(for pid: pid_t) -> NSRunningApplication? {
+        if let frontmost = NSWorkspace.shared.frontmostApplication,
+           frontmost.processIdentifier == pid {
+            return frontmost
+        }
+        return NSRunningApplication(processIdentifier: pid)
+    }
+
+    private func isSuppressed(pid: pid_t, host: String) -> Bool {
+        guard let suppressed = lastSuppressedHit else { return false }
+        if suppressed.pid == pid && suppressed.host == host {
+            if dateProvider() < suppressed.expiresAt {
+                return true
+            }
+        }
+        lastSuppressedHit = nil
+        return false
+    }
+
     private func triggerIntervention(for rule: TargetRule, application: NSRunningApplication, targetURL: URL?) {
-        let intervention = ActiveIntervention(rule: rule, application: application, targetURL: targetURL)
+        let intervention = ActiveIntervention(
+            rule: rule,
+            application: application,
+            targetURL: targetURL,
+            startedAt: dateProvider()
+        )
         self.activeIntervention = intervention
         onInterventionTriggered?(intervention)
     }

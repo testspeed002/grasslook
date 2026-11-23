@@ -1,3 +1,5 @@
+// Unit tests for TargetRule matching, CooldownManager, BrowserMonitor, and AppInterceptionEngine.
+
 import XCTest
 @testable import Grasslook
 
@@ -32,7 +34,7 @@ final class InterceptionTests: XCTestCase {
         )
 
         XCTAssertTrue(rule.matches(bundleIdentifier: "com.hnc.Discord"))
-        XCTAssertTrue(rule.matches(bundleIdentifier: "COM.HNC.DISCORD")) // Case insensitive
+        XCTAssertTrue(rule.matches(bundleIdentifier: "COM.HNC.DISCORD"))
         XCTAssertFalse(rule.matches(bundleIdentifier: "com.tinyspeck.slackmacgap"))
     }
 
@@ -42,14 +44,11 @@ final class InterceptionTests: XCTestCase {
             kind: .website(domainPattern: "x.com")
         )
 
-        // Exact match
         XCTAssertTrue(rule.matches(host: "x.com"))
-        // Subdomain match
         XCTAssertTrue(rule.matches(host: "mobile.x.com"))
         XCTAssertTrue(rule.matches(url: URL(string: "https://x.com/home")!))
         XCTAssertTrue(rule.matches(url: URL(string: "https://sub.x.com/user/123")!))
 
-        // Non-match
         XCTAssertFalse(rule.matches(host: "notx.com"))
         XCTAssertFalse(rule.matches(host: "google.com"))
     }
@@ -73,46 +72,54 @@ final class InterceptionTests: XCTestCase {
         let rule = TargetRule(
             name: "Test Site",
             kind: .website(domainPattern: "distracting.com"),
-            cooldownDuration: 60.0 // 1 minute
+            cooldownDuration: 60.0
         )
 
         XCTAssertFalse(cooldownManager.isUnderCooldown(for: rule))
 
-        // Record mindful pass
         cooldownManager.recordMindfulPass(for: rule)
         XCTAssertTrue(cooldownManager.isUnderCooldown(for: rule))
         XCTAssertEqual(cooldownManager.remainingCooldown(for: rule), 60.0)
 
-        // Advance 30 seconds -> still under cooldown
         timeProvider.advance(by: 30.0)
         XCTAssertTrue(cooldownManager.isUnderCooldown(for: rule))
         XCTAssertEqual(cooldownManager.remainingCooldown(for: rule), 30.0)
 
-        // Advance 31 more seconds -> cooldown expired
         timeProvider.advance(by: 31.0)
         XCTAssertFalse(cooldownManager.isUnderCooldown(for: rule))
         XCTAssertNil(cooldownManager.remainingCooldown(for: rule))
     }
 
-    func testUniversalBrowserBundleIdentifiers() {
+    func testUniversalBrowserBundleIdentifiers() async {
         let monitor = BrowserMonitor()
-        // Mainstream
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.apple.Safari"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.google.Chrome"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "company.thebrowser.Browser")) // Arc
-        // Niche browsers requested
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.koush.helium"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.dia.browser"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.blanc.browser"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.kagi.kagimacOS")) // Orion
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "app.zen-browser.zen")) // Zen
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.vivaldi.Vivaldi"))
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "org.mozilla.firefox"))
 
-        // Custom registration
-        XCTAssertFalse(monitor.isSupportedBrowser(bundleIdentifier: "com.custom.nicheapp"))
-        monitor.registerCustomBrowser(bundleIdentifier: "com.custom.nicheapp")
-        XCTAssertTrue(monitor.isSupportedBrowser(bundleIdentifier: "com.custom.nicheapp"))
+        let safari = await monitor.isSupportedBrowser(bundleIdentifier: "com.apple.Safari")
+        let chrome = await monitor.isSupportedBrowser(bundleIdentifier: "com.google.Chrome")
+        let arc = await monitor.isSupportedBrowser(bundleIdentifier: "company.thebrowser.Browser")
+        let helium = await monitor.isSupportedBrowser(bundleIdentifier: "com.koush.helium")
+        let dia = await monitor.isSupportedBrowser(bundleIdentifier: "com.dia.browser")
+        let blanc = await monitor.isSupportedBrowser(bundleIdentifier: "com.blanc.browser")
+        let orion = await monitor.isSupportedBrowser(bundleIdentifier: "com.kagi.kagimacOS")
+        let zen = await monitor.isSupportedBrowser(bundleIdentifier: "app.zen-browser.zen")
+        let vivaldi = await monitor.isSupportedBrowser(bundleIdentifier: "com.vivaldi.Vivaldi")
+        let firefox = await monitor.isSupportedBrowser(bundleIdentifier: "org.mozilla.firefox")
+
+        XCTAssertTrue(safari)
+        XCTAssertTrue(chrome)
+        XCTAssertTrue(arc)
+        XCTAssertTrue(helium)
+        XCTAssertTrue(dia)
+        XCTAssertTrue(blanc)
+        XCTAssertTrue(orion)
+        XCTAssertTrue(zen)
+        XCTAssertTrue(vivaldi)
+        XCTAssertTrue(firefox)
+
+        let customBefore = await monitor.isSupportedBrowser(bundleIdentifier: "com.custom.nicheapp")
+        XCTAssertFalse(customBefore)
+        await monitor.registerCustomBrowser(bundleIdentifier: "com.custom.nicheapp")
+        let customAfter = await monitor.isSupportedBrowser(bundleIdentifier: "com.custom.nicheapp")
+        XCTAssertTrue(customAfter)
     }
 
     func testCooldownManagerClearAll() {
@@ -143,22 +150,107 @@ final class InterceptionTests: XCTestCase {
         XCTAssertFalse(rule.matches(url: URL(string: "https://notyoutube.com")!))
     }
 
-    func testDismissInterventionWebsiteClosesTab() {
-        let mockBrowser = MockBrowserMonitor()
+    func testDismissInterventionWebsiteRoutesThroughEnforceBlock() async {
+        let mockBrowser = MockBrowserMonitor(mockResult: .closedTabViaAppleScript)
         let engine = AppInterceptionEngine(
             rules: [TargetRule(name: "X", kind: .website(domainPattern: "x.com"))],
             browserMonitor: mockBrowser
         )
+        engine.browserEnforcementAction = .closeTab
+        engine.sendCmdWToNonScriptableBrowsers = true
 
         let app = NSRunningApplication.current
+        let targetURL = URL(string: "https://x.com/home")!
         let intervention = AppInterceptionEngine.ActiveIntervention(
             rule: TargetRule(name: "X", kind: .website(domainPattern: "x.com")),
             application: app,
-            targetURL: URL(string: "https://x.com/home")!
+            targetURL: targetURL
         )
 
-        XCTAssertFalse(mockBrowser.didCallCloseTab)
-        engine.dismissInterventionAndCloseApp(for: intervention)
-        XCTAssertTrue(mockBrowser.didCallCloseTab)
+        XCTAssertFalse(mockBrowser.didCallEnforceBlock)
+        let result = await engine.enforceDismissal(for: intervention)
+        XCTAssertTrue(mockBrowser.didCallEnforceBlock)
+        XCTAssertEqual(result, .closedTabViaAppleScript)
+        XCTAssertEqual(mockBrowser.lastEnforcedOptions?.action, .closeTab)
+        XCTAssertEqual(mockBrowser.lastEnforcedOptions?.sendCmdWToNonScriptable, true)
+        XCTAssertEqual(mockBrowser.lastEnforcedOptions?.blockedURL, targetURL)
+    }
+
+    func testPollActiveBrowserOnceTriggersInterventionWhenFrontmostMatches() async {
+        let app = NSRunningApplication.current
+        let bundleId = app.bundleIdentifier ?? "com.apple.dt.xctest"
+        let mockBrowser = MockBrowserMonitor(
+            mockURL: URL(string: "https://x.com/home"),
+            supportedBundleIds: [bundleId]
+        )
+
+        let engine = AppInterceptionEngine(
+            rules: [TargetRule(name: "X", kind: .website(domainPattern: "x.com"))],
+            browserMonitor: mockBrowser,
+            frontmostPIDProvider: { app.processIdentifier }
+        )
+        engine.startMonitoring()
+        defer { engine.stopMonitoring() }
+
+        await engine.pollActiveBrowserOnce(for: app)
+        XCTAssertEqual(engine.activeIntervention?.targetURL?.host, "x.com")
+    }
+
+    func testPollActiveBrowserOnceAbortsWhenFrontmostPIDMismatches() async {
+        let app = NSRunningApplication.current
+        let bundleId = app.bundleIdentifier ?? "com.apple.dt.xctest"
+        let mockBrowser = MockBrowserMonitor(
+            mockURL: URL(string: "https://x.com/home"),
+            supportedBundleIds: [bundleId]
+        )
+
+        let mismatchedPID = app.processIdentifier + 999
+        let engine = AppInterceptionEngine(
+            rules: [TargetRule(name: "X", kind: .website(domainPattern: "x.com"))],
+            browserMonitor: mockBrowser,
+            frontmostPIDProvider: { mismatchedPID }
+        )
+        engine.startMonitoring()
+        defer { engine.stopMonitoring() }
+
+        await engine.pollActiveBrowserOnce(for: app)
+        XCTAssertNil(engine.activeIntervention)
+    }
+
+    func testDeduplicationSuppressesRepeatedHostDuringWindowAndClearsOnHostChange() async throws {
+        let app = NSRunningApplication.current
+        let bundleId = app.bundleIdentifier ?? "com.apple.dt.xctest"
+        let timeProvider = MockTimeProvider()
+        let mockBrowser = MockBrowserMonitor(
+            mockURL: URL(string: "https://x.com/home"),
+            supportedBundleIds: [bundleId]
+        )
+
+        let engine = AppInterceptionEngine(
+            rules: [
+                TargetRule(name: "X", kind: .website(domainPattern: "x.com")),
+                TargetRule(name: "Reddit", kind: .website(domainPattern: "reddit.com"))
+            ],
+            browserMonitor: mockBrowser,
+            frontmostPIDProvider: { app.processIdentifier },
+            dateProvider: { timeProvider.currentDate() }
+        )
+        engine.startMonitoring()
+        defer { engine.stopMonitoring() }
+
+        await engine.pollActiveBrowserOnce(for: app)
+        let firstIntervention = try XCTUnwrap(engine.activeIntervention)
+        _ = await engine.enforceDismissal(for: firstIntervention)
+        XCTAssertNil(engine.activeIntervention)
+
+        // Within 2.5s suppression window on same (pid, host) -> suppressed
+        timeProvider.advance(by: 1.0)
+        await engine.pollActiveBrowserOnce(for: app)
+        XCTAssertNil(engine.activeIntervention)
+
+        // Host changes -> suppression cleared and new host triggers immediately
+        mockBrowser.mockURL = URL(string: "https://reddit.com/r/swift")
+        await engine.pollActiveBrowserOnce(for: app)
+        XCTAssertEqual(engine.activeIntervention?.targetURL?.host, "reddit.com")
     }
 }

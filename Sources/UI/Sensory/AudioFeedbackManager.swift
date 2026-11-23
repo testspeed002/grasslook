@@ -9,7 +9,7 @@ public protocol AudioFeedbackProtocol: AnyObject {
     func playBreathingCue()
 }
 
-/// Manages subtle, calming audio cues for eye breaks and mindful friction breathing.
+/// Plays sound cues for breaks and breathing delays.
 @MainActor
 public final class AudioFeedbackManager: ObservableObject, AudioFeedbackProtocol {
     @Published public var isSoundEnabled: Bool = true

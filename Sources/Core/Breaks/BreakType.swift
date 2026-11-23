@@ -31,9 +31,9 @@ public enum BreakType: String, CaseIterable, Codable, Sendable {
     public var guidance: String {
         switch self {
         case .micro:
-            return "Look at an object at least 20 feet away to relax your ciliary eye muscles."
+            return "Look at something 20 feet away to rest your eyes."
         case .long:
-            return "Stand up, roll your shoulders, stretch, or take a short walk to reset your posture."
+            return "Stand up, stretch, or take a short walk."
         }
     }
 

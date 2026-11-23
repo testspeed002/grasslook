@@ -1,12 +1,12 @@
 import Foundation
 
-/// Defines whether a friction rule targets a native desktop app or a web domain.
+/// Defines whether a rule targets a desktop app or a web domain.
 public enum TargetRuleKind: Codable, Sendable, Equatable {
     case application(bundleIdentifier: String)
     case website(domainPattern: String)
 }
 
-/// A configurable rule for triggering mindful breathing friction.
+/// A rule for triggering breathing delays on target apps or websites.
 public struct TargetRule: Identifiable, Codable, Sendable, Equatable {
     public let id: UUID
     public var name: String

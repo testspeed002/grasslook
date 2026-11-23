@@ -40,7 +40,7 @@ function getRunningPID() {
 
 function printHelp() {
   console.log(`
-🌱 Grasslook CLI — Native macOS Eye Rest & Mindful Distraction Delays
+🌱 Grasslook CLI — macOS Eye Rest & App Delays
 
 Usage:
   grasslook [command]

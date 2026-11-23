@@ -1,6 +1,6 @@
 import Foundation
 
-/// Privacy-first local analytics tracker for breaks, streaks, and mindful delays.
+/// Tracks break and delay statistics locally.
 @MainActor
 public final class AnalyticsManager: ObservableObject {
     @Published public private(set) var breaksTaken: Int = 0

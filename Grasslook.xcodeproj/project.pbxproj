@@ -10,21 +10,30 @@
 		05042011311B9DE364656912 /* BreakSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */; };
 		05A3B559C71FBC9C911C6C86 /* PresentationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279FF36CEDEBF1E0D8DA25E0 /* PresentationSensor.swift */; };
 		10855E95914C45FE89C82337 /* BreakScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */; };
-		12A1FF49698F99FC90582512 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */; };
+		13A23E4C6EDF5E6D601B6D82 /* BrowserEnforcementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3CF6F7CB4D9665D59F8F2C /* BrowserEnforcementTests.swift */; };
 		186805EE0682AE9FD1385A70 /* InstalledAppsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */; };
+		2146918E4E3C667C9DE432BF /* LaunchAtLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4439D4AD0A7D7AEFDC85E6 /* LaunchAtLoginManager.swift */; };
 		25DC9EFB3DAF14A7304E8BAB /* BreakOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E72859DC3FB9259FA58FDB9 /* BreakOverlayView.swift */; };
+		2705A7EC5E09F0A17031A90D /* PreBreakNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5B1EE32522272B7CC40138 /* PreBreakNotificationManager.swift */; };
 		4E8A6EF40186355B414A2553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */; };
 		5B63E71F4C52C29D8C880F52 /* GrasslookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8B99A7E79AF6D49E24F451 /* GrasslookApp.swift */; };
 		62BFE301E34FA787F0CFFDAA /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DF82305E06D2FD8C12D9A /* SettingsWindowController.swift */; };
+		69B4695A9A931D4049CF2F5B /* shield-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98C5C31A5188ACD9BA88CBAD /* shield-bg.jpg */; };
+		72ABAA9FAB9079B4DA1FCF33 /* BrowserDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B04EA5DDADB0368F2CF1B /* BrowserDiscovery.swift */; };
 		741F30E0CD78906502A979DD /* BrowserMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */; };
 		7559632D63A00CC2B9BF494E /* OverlayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C567F150BC7553120E2A13CB /* OverlayWindowController.swift */; };
+		7764789DD49DB3E91DD3123C /* shield.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C44FB194164448298B87FD4 /* shield.html */; };
 		853403DA0B956BC298C6B0F4 /* TargetRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C229A0FA26630344C799F17F /* TargetRule.swift */; };
+		85D2AD568BC52A360EF7CDEB /* ConfigPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F177DC99CFEA2A0A9A59F /* ConfigPersistenceTests.swift */; };
 		8B2197C28D6D0944B68432A4 /* GrasslookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532930B96BF785BBE6B91D50 /* GrasslookTests.swift */; };
+		9734296052F752B5F9D0567F /* GrasslookConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE29EE60109B8876C4EF8A8 /* GrasslookConfigStore.swift */; };
+		99CFC33920B4CCA347EDE0E4 /* BrowserDiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8602C0C1119851DE28BAF6 /* BrowserDiscoveryTests.swift */; };
 		9BC9D7EFA180D237B1716E71 /* VisualEffectBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E34B474F407D4A23648DDB /* VisualEffectBackgroundView.swift */; };
 		A95AC9633ACAD8FD10AC2C2A /* CooldownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945A0A889E4B986C5FE845A /* CooldownManager.swift */; };
 		B14062797358835434C9F05C /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D6F9093D60F4A0A6529A09 /* AnalyticsManager.swift */; };
 		B625409772249E179F13A838 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */; };
 		BE06560BEA0EC15F7A66FF97 /* BreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419B1DF42C2C12443E76F47 /* BreakState.swift */; };
+		BF9AA9A1D99CC88E9A987667 /* BrowserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7805E5F022EF873FB99E34F /* BrowserProfile.swift */; };
 		C7A60B8D3C84BB6C24B14ACC /* ForestTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBEC507367E2F29AB320D89 /* ForestTheme.swift */; };
 		CE2B227381E22B350862C2C9 /* AppInterceptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */; };
 		D26F98E26DC36DB11E285E5D /* BreakType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A65DAD5E5282C7E151924AB /* BreakType.swift */; };
@@ -32,6 +41,9 @@
 		D7132FBFB1F1D786A01268D3 /* IdleSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C6B82BE08F2C5A626F48F3 /* IdleSensor.swift */; };
 		D790CD8F527AF75B40B56545 /* GrasslookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4ABE4BD52B608308868D8E /* GrasslookCoordinator.swift */; };
 		DB247552D6F348343F09FEDC /* InterceptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF24268A3F296E2A5920DEB /* InterceptionTests.swift */; };
+		E55F9ECE3C62BCC56C929449 /* SdefScriptingInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4638865278701E8F87ED3CD /* SdefScriptingInspector.swift */; };
+		EF36789A5AAE848B48F9891E /* FocusSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C389641641FBB7D8C120A6 /* FocusSchedule.swift */; };
+		F3A1069DF9C7E3420890E4C9 /* BrowserPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F2017ADE4D3907B044614 /* BrowserPermissionChecker.swift */; };
 		F5A11BC61BCF4A4AE7B7A5CC /* AudioFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */; };
 		FFF1904861EE2399FCDB4246 /* BreathingBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3378B321DDE873200DFA7F /* BreathingBubbleView.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +59,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C44FB194164448298B87FD4 /* shield.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = shield.html; sourceTree = "<group>"; };
+		0F2F2017ADE4D3907B044614 /* BrowserPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserPermissionChecker.swift; sourceTree = "<group>"; };
+		10C389641641FBB7D8C120A6 /* FocusSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSchedule.swift; sourceTree = "<group>"; };
 		145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserMonitor.swift; sourceTree = "<group>"; };
 		16E34B474F407D4A23648DDB /* VisualEffectBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBackgroundView.swift; sourceTree = "<group>"; };
 		1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,15 +69,20 @@
 		2A65DAD5E5282C7E151924AB /* BreakType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakType.swift; sourceTree = "<group>"; };
 		2C6DF82305E06D2FD8C12D9A /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakSchedulerTests.swift; sourceTree = "<group>"; };
-		4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		4B4ABE4BD52B608308868D8E /* GrasslookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookCoordinator.swift; sourceTree = "<group>"; };
+		4B5B1EE32522272B7CC40138 /* PreBreakNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreBreakNotificationManager.swift; sourceTree = "<group>"; };
+		4C8602C0C1119851DE28BAF6 /* BrowserDiscoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDiscoveryTests.swift; sourceTree = "<group>"; };
 		532930B96BF785BBE6B91D50 /* GrasslookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookTests.swift; sourceTree = "<group>"; };
 		5617BDF676455B5F2C0D4885 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5E72859DC3FB9259FA58FDB9 /* BreakOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakOverlayView.swift; sourceTree = "<group>"; };
 		5EBEC507367E2F29AB320D89 /* ForestTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestTheme.swift; sourceTree = "<group>"; };
+		614F177DC99CFEA2A0A9A59F /* ConfigPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPersistenceTests.swift; sourceTree = "<group>"; };
 		6945A0A889E4B986C5FE845A /* CooldownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownManager.swift; sourceTree = "<group>"; };
 		6D8B99A7E79AF6D49E24F451 /* GrasslookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookApp.swift; sourceTree = "<group>"; };
 		72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
+		8AE29EE60109B8876C4EF8A8 /* GrasslookConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrasslookConfigStore.swift; sourceTree = "<group>"; };
+		98C5C31A5188ACD9BA88CBAD /* shield-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "shield-bg.jpg"; sourceTree = "<group>"; };
+		9D4439D4AD0A7D7AEFDC85E6 /* LaunchAtLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginManager.swift; sourceTree = "<group>"; };
 		A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakScheduler.swift; sourceTree = "<group>"; };
 		A6D6F9093D60F4A0A6529A09 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsProvider.swift; sourceTree = "<group>"; };
@@ -72,9 +92,13 @@
 		D0C6B82BE08F2C5A626F48F3 /* IdleSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleSensor.swift; sourceTree = "<group>"; };
 		DAEDFDBCB07ABFB37C9FD360 /* Grasslook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grasslook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedbackManager.swift; sourceTree = "<group>"; };
+		DF3CF6F7CB4D9665D59F8F2C /* BrowserEnforcementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserEnforcementTests.swift; sourceTree = "<group>"; };
 		E384B7C44E3231C0E594BA17 /* GrasslookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrasslookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41B04EA5DDADB0368F2CF1B /* BrowserDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDiscovery.swift; sourceTree = "<group>"; };
+		E7805E5F022EF873FB99E34F /* BrowserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserProfile.swift; sourceTree = "<group>"; };
 		EB3378B321DDE873200DFA7F /* BreathingBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingBubbleView.swift; sourceTree = "<group>"; };
 		F419B1DF42C2C12443E76F47 /* BreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakState.swift; sourceTree = "<group>"; };
+		F4638865278701E8F87ED3CD /* SdefScriptingInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdefScriptingInspector.swift; sourceTree = "<group>"; };
 		F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInterceptionEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,9 +127,13 @@
 			isa = PBXGroup;
 			children = (
 				F8CFC6105899EB997E58E596 /* AppInterceptionEngine.swift */,
+				E41B04EA5DDADB0368F2CF1B /* BrowserDiscovery.swift */,
 				145481CEE3B7B029C7AAF77D /* BrowserMonitor.swift */,
+				0F2F2017ADE4D3907B044614 /* BrowserPermissionChecker.swift */,
+				E7805E5F022EF873FB99E34F /* BrowserProfile.swift */,
 				6945A0A889E4B986C5FE845A /* CooldownManager.swift */,
 				AC828C62D68672BA5D761744 /* InstalledAppsProvider.swift */,
+				F4638865278701E8F87ED3CD /* SdefScriptingInspector.swift */,
 				C229A0FA26630344C799F17F /* TargetRule.swift */,
 			);
 			path = Friction;
@@ -115,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				DCE4E4B36D83AFA025DFF695 /* AudioFeedbackManager.swift */,
+				4B5B1EE32522272B7CC40138 /* PreBreakNotificationManager.swift */,
 			);
 			path = Sensory;
 			sourceTree = "<group>";
@@ -130,15 +159,33 @@
 			path = Overlays;
 			sourceTree = "<group>";
 		};
+		6960FF0F0F63246A1D1C56BE /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				8AE29EE60109B8876C4EF8A8 /* GrasslookConfigStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		76C3A8F4A05288682C307582 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				B3ECA2BFF0D3DBC36572B709 /* Analytics */,
 				C5C8CFDA99B79E84301EE1AC /* Breaks */,
 				3CCBC052874890521555CDC2 /* Friction */,
+				6960FF0F0F63246A1D1C56BE /* Persistence */,
 				8FC355291D9050617A6AE801 /* Sensors */,
+				805CBFBC900E76DDA130E0E1 /* System */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		805CBFBC900E76DDA130E0E1 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				9D4439D4AD0A7D7AEFDC85E6 /* LaunchAtLoginManager.swift */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 		81D5C53A4071FBEAD324BD18 = {
@@ -156,6 +203,9 @@
 			children = (
 				72A5E5F10A15E4EABF4A9F91 /* AnalyticsTests.swift */,
 				3B002EDBC7CBA299399F252A /* BreakSchedulerTests.swift */,
+				4C8602C0C1119851DE28BAF6 /* BrowserDiscoveryTests.swift */,
+				DF3CF6F7CB4D9665D59F8F2C /* BrowserEnforcementTests.swift */,
+				614F177DC99CFEA2A0A9A59F /* ConfigPersistenceTests.swift */,
 				532930B96BF785BBE6B91D50 /* GrasslookTests.swift */,
 				CCF24268A3F296E2A5920DEB /* InterceptionTests.swift */,
 			);
@@ -182,8 +232,9 @@
 		A77A46A83EB39E451C18977C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4798BA3BBC726C7FC11D8A72 /* AppIcon.icns */,
 				1E95EDA3A5AB509CC52EB762 /* Assets.xcassets */,
+				98C5C31A5188ACD9BA88CBAD /* shield-bg.jpg */,
+				0C44FB194164448298B87FD4 /* shield.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -221,6 +272,7 @@
 				A3DEB5BBF4807D6276A2CB46 /* BreakScheduler.swift */,
 				F419B1DF42C2C12443E76F47 /* BreakState.swift */,
 				2A65DAD5E5282C7E151924AB /* BreakType.swift */,
+				10C389641641FBB7D8C120A6 /* FocusSchedule.swift */,
 			);
 			path = Breaks;
 			sourceTree = "<group>";
@@ -315,8 +367,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12A1FF49698F99FC90582512 /* AppIcon.icns in Resources */,
 				4E8A6EF40186355B414A2553 /* Assets.xcassets in Resources */,
+				69B4695A9A931D4049CF2F5B /* shield-bg.jpg in Resources */,
+				7764789DD49DB3E91DD3123C /* shield.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +382,9 @@
 			files = (
 				B625409772249E179F13A838 /* AnalyticsTests.swift in Sources */,
 				05042011311B9DE364656912 /* BreakSchedulerTests.swift in Sources */,
+				99CFC33920B4CCA347EDE0E4 /* BrowserDiscoveryTests.swift in Sources */,
+				13A23E4C6EDF5E6D601B6D82 /* BrowserEnforcementTests.swift in Sources */,
+				85D2AD568BC52A360EF7CDEB /* ConfigPersistenceTests.swift in Sources */,
 				8B2197C28D6D0944B68432A4 /* GrasslookTests.swift in Sources */,
 				DB247552D6F348343F09FEDC /* InterceptionTests.swift in Sources */,
 			);
@@ -346,15 +402,23 @@
 				BE06560BEA0EC15F7A66FF97 /* BreakState.swift in Sources */,
 				D26F98E26DC36DB11E285E5D /* BreakType.swift in Sources */,
 				FFF1904861EE2399FCDB4246 /* BreathingBubbleView.swift in Sources */,
+				72ABAA9FAB9079B4DA1FCF33 /* BrowserDiscovery.swift in Sources */,
 				741F30E0CD78906502A979DD /* BrowserMonitor.swift in Sources */,
+				F3A1069DF9C7E3420890E4C9 /* BrowserPermissionChecker.swift in Sources */,
+				BF9AA9A1D99CC88E9A987667 /* BrowserProfile.swift in Sources */,
 				A95AC9633ACAD8FD10AC2C2A /* CooldownManager.swift in Sources */,
+				EF36789A5AAE848B48F9891E /* FocusSchedule.swift in Sources */,
 				C7A60B8D3C84BB6C24B14ACC /* ForestTheme.swift in Sources */,
 				5B63E71F4C52C29D8C880F52 /* GrasslookApp.swift in Sources */,
+				9734296052F752B5F9D0567F /* GrasslookConfigStore.swift in Sources */,
 				D790CD8F527AF75B40B56545 /* GrasslookCoordinator.swift in Sources */,
 				D7132FBFB1F1D786A01268D3 /* IdleSensor.swift in Sources */,
 				186805EE0682AE9FD1385A70 /* InstalledAppsProvider.swift in Sources */,
+				2146918E4E3C667C9DE432BF /* LaunchAtLoginManager.swift in Sources */,
 				7559632D63A00CC2B9BF494E /* OverlayWindowController.swift in Sources */,
+				2705A7EC5E09F0A17031A90D /* PreBreakNotificationManager.swift in Sources */,
 				05A3B559C71FBC9C911C6C86 /* PresentationSensor.swift in Sources */,
+				E55F9ECE3C62BCC56C929449 /* SdefScriptingInspector.swift in Sources */,
 				D4B534CFF5C4CC2E1F489CA4 /* SettingsView.swift in Sources */,
 				62BFE301E34FA787F0CFFDAA /* SettingsWindowController.swift in Sources */,
 				853403DA0B956BC298C6B0F4 /* TargetRule.swift in Sources */,
@@ -379,18 +443,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Entitlements/Grasslook.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
-				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_FILE = "Grasslook-Info.plist";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAccessibilityUsageDescription = "Grasslook requires Accessibility permissions to monitor frontmost browser tabs and distracting application switches.";
-				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to query active browser URLs for mindful friction delays.";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Grasslook. All rights reserved.";
+				INFOPLIST_KEY_NSAppSleepDisabled = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to check active browser tabs for blocked URLs.";
+				INFOPLIST_KEY_NSSupportsAutomaticTermination = NO;
+				INFOPLIST_KEY_NSSupportsSuddenTermination = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_CODE_SIGN_FLAGS = "--requirements \"=designated => identifier \\\"com.grasslook.app\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.app;
 				PRODUCT_NAME = Grasslook;
@@ -422,6 +489,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -486,18 +555,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Entitlements/Grasslook.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
-				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_FILE = "Grasslook-Info.plist";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAccessibilityUsageDescription = "Grasslook requires Accessibility permissions to monitor frontmost browser tabs and distracting application switches.";
-				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to query active browser URLs for mindful friction delays.";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Grasslook. All rights reserved.";
+				INFOPLIST_KEY_NSAppSleepDisabled = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Grasslook uses AppleScript to check active browser tabs for blocked URLs.";
+				INFOPLIST_KEY_NSSupportsAutomaticTermination = NO;
+				INFOPLIST_KEY_NSSupportsSuddenTermination = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_CODE_SIGN_FLAGS = "--requirements \"=designated => identifier \\\"com.grasslook.app\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grasslook.app;
 				PRODUCT_NAME = Grasslook;
@@ -529,6 +601,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

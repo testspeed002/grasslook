@@ -1,9 +1,13 @@
+// Full-screen break overlay view with countdown ring, strict mode, and dusk cue.
+
 import SwiftUI
 
-/// Full-screen break overlay presenting eye relaxation or posture stretch guidance with a live animated countdown.
+/// Full-screen break overlay with timer and guidance.
 public struct BreakOverlayView: View {
     public let type: BreakType
     public let duration: TimeInterval
+    public let strictMode: Bool
+    public let isDuskCueActive: Bool
     public let onSkip: () -> Void
     public let onPostpone: () -> Void
     public let onComplete: () -> Void
@@ -18,16 +22,40 @@ public struct BreakOverlayView: View {
         return max(0.0, min(1.0, 1.0 - (secondsRemaining / duration)))
     }
 
+    private var accentColor: Color {
+        isDuskCueActive ? Color(red: 0.68, green: 0.60, blue: 0.86) : ForestTheme.sage
+    }
+
+    private var secondaryAccentColor: Color {
+        isDuskCueActive ? Color(red: 0.76, green: 0.70, blue: 0.90) : ForestTheme.leaf
+    }
+
+    private var ringGradient: LinearGradient {
+        if isDuskCueActive {
+            return LinearGradient(
+                colors: [Color(red: 0.38, green: 0.34, blue: 0.58), accentColor],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
+        return ForestTheme.lushGradient
+    }
+
+    /// Creates a break overlay view.
     public init(
         type: BreakType,
         duration: TimeInterval,
         secondsRemaining: TimeInterval? = nil,
+        strictMode: Bool = false,
+        isDuskCueActive: Bool = false,
         onSkip: @escaping () -> Void,
         onPostpone: @escaping () -> Void,
         onComplete: @escaping () -> Void
     ) {
         self.type = type
         self.duration = duration
+        self.strictMode = strictMode
+        self.isDuskCueActive = isDuskCueActive
         self.onSkip = onSkip
         self.onPostpone = onPostpone
         self.onComplete = onComplete
@@ -36,36 +64,55 @@ public struct BreakOverlayView: View {
 
     public var body: some View {
         ZStack {
-            // Liquid Glass Background
             VisualEffectBackgroundView(material: .fullScreenUI, blendingMode: .behindWindow)
                 .ignoresSafeArea()
 
+            if isDuskCueActive {
+                Color(red: 0.08, green: 0.07, blue: 0.16)
+                    .opacity(0.28)
+                    .ignoresSafeArea()
+            }
+
             VStack(spacing: 32) {
-                // Header
+                if isDuskCueActive {
+                    TimelineView(.periodic(from: .now, by: 15)) { context in
+                        HStack(spacing: 6) {
+                            Image(systemName: "moon.stars.fill")
+                                .font(.caption)
+                            Text(context.date, style: .time)
+                                .font(.caption.monospacedDigit())
+                        }
+                        .foregroundStyle(secondaryAccentColor.opacity(0.9))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(accentColor.opacity(0.14))
+                        .clipShape(Capsule())
+                    }
+                }
+
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
                         Image(systemName: type.sfSymbol)
-                            .foregroundStyle(ForestTheme.sage)
+                            .foregroundStyle(accentColor)
                             .font(.title2)
                         Text(type.title)
                             .font(.title.weight(.semibold))
                             .foregroundStyle(.primary)
                     }
-                    Text(type == .micro ? "The 20-20-20 Rule" : "Physical Reset")
+                    Text(type == .micro ? "20-20-20 Rule" : "Break")
                         .font(.subheadline)
-                        .foregroundStyle(ForestTheme.leaf.opacity(0.8))
+                        .foregroundStyle(secondaryAccentColor.opacity(0.85))
                 }
 
-                // Central Countdown Ring
                 ZStack {
                     Circle()
-                        .stroke(ForestTheme.forest.opacity(0.2), lineWidth: 8)
+                        .stroke((isDuskCueActive ? accentColor : ForestTheme.forest).opacity(0.2), lineWidth: 8)
                         .frame(width: 180, height: 180)
 
                     Circle()
                         .trim(from: 0, to: CGFloat(progress))
                         .stroke(
-                            ForestTheme.lushGradient,
+                            ringGradient,
                             style: StrokeStyle(lineWidth: 8, lineCap: .round)
                         )
                         .frame(width: 180, height: 180)
@@ -76,35 +123,35 @@ public struct BreakOverlayView: View {
                         Text(formattedTime(secondsRemaining))
                             .font(.system(size: 38, weight: .bold, design: .rounded).monospacedDigit())
                             .foregroundStyle(.primary)
-                            .contentTransition(.numericText())
+                            .contentTransition(reduceMotion ? .identity : .numericText())
 
                         Text("remaining")
                             .font(.caption2)
-                            .foregroundStyle(ForestTheme.leaf)
+                            .foregroundStyle(secondaryAccentColor)
                     }
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Time remaining: \(formattedTime(secondsRemaining))")
 
-                // Guidance Card
                 Text(type.guidance)
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: 380)
 
-                // Actions
                 HStack(spacing: 16) {
-                    Button(action: onSkip) {
-                        Text("Skip")
-                            .frame(width: 120)
-                            .padding(.vertical, 10)
-                            .background(Color.primary.opacity(0.08))
-                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    if !strictMode {
+                        Button(action: onSkip) {
+                            Text("Skip")
+                                .frame(width: 120)
+                                .padding(.vertical, 10)
+                                .background(Color.primary.opacity(0.08))
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
+                        .keyboardShortcut(.escape, modifiers: [])
+                        .accessibilityLabel("Skip break")
                     }
-                    .buttonStyle(.plain)
-                    .keyboardShortcut(.escape, modifiers: [])
-                    .accessibilityLabel("Skip break")
 
                     Button(action: onPostpone) {
                         HStack(spacing: 6) {
@@ -113,7 +160,7 @@ public struct BreakOverlayView: View {
                         }
                         .frame(width: 150)
                         .padding(.vertical, 10)
-                        .background(ForestTheme.forest.opacity(0.35))
+                        .background((isDuskCueActive ? accentColor : ForestTheme.forest).opacity(0.35))
                         .foregroundStyle(ForestTheme.mist)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
@@ -159,8 +206,12 @@ public struct BreakOverlayView: View {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
                 guard !Task.isCancelled else { return }
 
-                withAnimation(.linear(duration: 1.0)) {
+                if reduceMotion {
                     secondsRemaining = max(0, secondsRemaining - 1)
+                } else {
+                    withAnimation(.linear(duration: 1.0)) {
+                        secondsRemaining = max(0, secondsRemaining - 1)
+                    }
                 }
 
                 if secondsRemaining == 0 {
@@ -173,11 +224,11 @@ public struct BreakOverlayView: View {
 
     private func formattedTime(_ seconds: TimeInterval) -> String {
         let total = Int(ceil(seconds))
-        let m = total / 60
-        let s = total % 60
-        if m > 0 {
-            return String(format: "%d:%02d", m, s)
+        let minutes = total / 60
+        let secs = total % 60
+        if minutes > 0 {
+            return String(format: "%d:%02d", minutes, secs)
         }
-        return "\(s)s"
+        return "\(secs)s"
     }
 }

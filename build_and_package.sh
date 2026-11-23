@@ -32,7 +32,12 @@ hdiutil create \
 
 rm -rf dist/dmg_staging
 
+echo "==> [5/5] Packaging NPM Distribution Bundle..."
+mkdir -p npm/app
+tar -czf npm/app/Grasslook.app.tar.gz -C .derivedData/Build/Products/Release Grasslook.app
+
 echo "========================================"
-echo "  🎉 Release Package Created!"
-echo "  Artifact: $DMG_PATH ($(ls -lh "$DMG_PATH" | awk '{print $5}'))"
+echo "  🎉 Release Packages Created!"
+echo "  DMG Artifact: $DMG_PATH ($(ls -lh "$DMG_PATH" | awk '{print $5}'))"
+echo "  NPM Artifact: npm/app/Grasslook.app.tar.gz ($(ls -lh npm/app/Grasslook.app.tar.gz | awk '{print $5}'))"
 echo "========================================"

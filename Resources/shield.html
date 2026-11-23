@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grasslook - Pause and Breathe</title>
+  <style>
+    :root {
+      --scrim-color: rgba(10, 18, 28, 0.58);
+      --card-bg: rgba(13, 21, 31, 0.78);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --text-primary: #f3f6f8;
+      --text-secondary: rgba(226, 234, 240, 0.78);
+      --accent: #7cc59a;
+      --accent-hover: #92d6ae;
+      --pill-bg: rgba(124, 197, 154, 0.16);
+      --pill-border: rgba(124, 197, 154, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      color: var(--text-primary);
+      background-color: #0a121c;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background-image: url("shield-bg.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .scrim {
+      position: absolute;
+      inset: 0;
+      background-color: var(--scrim-color);
+      transition: background-color 0.6s ease;
+    }
+
+    .scrim.dusk {
+      background-color: rgba(26, 17, 22, 0.66);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 36px 32px;
+      border-radius: 20px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background-color: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      margin-bottom: 18px;
+    }
+
+    .clock {
+      display: none;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #f3c898;
+    }
+
+    .clock.visible {
+      display: block;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .rule-badge {
+      display: none;
+      margin: 0 auto 22px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .rule-badge.visible {
+      display: inline-block;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .return-link {
+      display: inline-block;
+      padding: 11px 22px;
+      border-radius: 12px;
+      background-color: var(--accent);
+      color: #0b1610;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .return-link:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: rgba(226, 234, 240, 0.56);
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div id="scrim" class="scrim"></div>
+    <section class="card" aria-label="Mindful pause shield">
+      <div class="eyebrow">Grasslook Pause</div>
+      <div id="night-clock" class="clock" aria-live="polite"></div>
+      <h1>Take a breath before continuing</h1>
+      <p class="subtitle">
+        This tab was paused to help you stay intentional with your attention and rest your eyes.
+      </p>
+      <div id="rule-badge" class="rule-badge"></div>
+      <div id="actions" class="actions">
+        <span class="hint">Close this tab when you are ready to return to your work.</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      function isSafeHttpURL(rawValue) {
+        if (!rawValue || typeof rawValue !== "string") {
+          return null;
+        }
+        var trimmed = rawValue.trim();
+        if (!trimmed) {
+          return null;
+        }
+        try {
+          var parsed = new URL(trimmed);
+          var protocol = parsed.protocol.toLowerCase();
+          if (protocol !== "http:" && protocol !== "https:") {
+            return null;
+          }
+          if (!parsed.hostname) {
+            return null;
+          }
+          return parsed;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      function updateNightState() {
+        var now = new Date();
+        var hour = now.getHours();
+        var isLateNight = hour >= 22 || hour < 6;
+        var scrim = document.getElementById("scrim");
+        var clockEl = document.getElementById("night-clock");
+
+        if (isLateNight) {
+          scrim.classList.add("dusk");
+          clockEl.classList.add("visible");
+          clockEl.textContent = "Local time: " + now.toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit"
+          });
+        } else {
+          scrim.classList.remove("dusk");
+          clockEl.classList.remove("visible");
+          clockEl.textContent = "";
+        }
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var ruleName = params.get("rule");
+      if (ruleName && ruleName.trim()) {
+        var badge = document.getElementById("rule-badge");
+        badge.textContent = "Matched rule: " + ruleName.trim();
+        badge.classList.add("visible");
+      }
+
+      var safeReturnURL = isSafeHttpURL(params.get("from"));
+      if (safeReturnURL) {
+        var actions = document.getElementById("actions");
+        var link = document.createElement("a");
+        link.className = "return-link";
+        link.setAttribute("href", safeReturnURL.href);
+        link.setAttribute("rel", "noopener noreferrer");
+        link.textContent = "Continue to " + safeReturnURL.hostname;
+        actions.insertBefore(link, actions.firstChild);
+      }
+
+      updateNightState();
+      window.setInterval(updateNightState, 15000);
+    })();
+  </script>
+</body>
+</html>
